@@ -9,7 +9,7 @@ const managerCard = function (manager) {
       </div>
       <div class="card-body">
         <p class="id">ID: ${manager.id}</p>
-        <p class="email">Email: ${manager.email}</p>
+        <p class="email">Email: <a href="mailto:${manager.email}" type="email">${manager.email}</a></p>
         <p class="officeNum">Office Number: ${manager.officeNumber}</p>
       </div>
     </div>
@@ -28,8 +28,9 @@ const engineerCard = function (engineer) {
   
         <div class="card-body">
           <p class="id">ID: ${engineer.id}</p>
-          <p class="email">Email: ${engineer.email}</p>
-          <p class="github">Github: ${engineer.github}</p>
+          <p class="email">Email: <a href="mailto:${engineer.email}" type="email">${engineer.email}</a></p>
+          <p class="github">Github: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></p>
+          
         </div>
       </div>
     </div>`;
@@ -47,7 +48,7 @@ const internCard = function (intern) {
     
           <div class="card-body">
             <p class="id">ID: ${intern.id}</p>
-            <p class="email">Email: ${intern.email}</p>
+            <p class="email">Email: <a href="mailto:${intern.email}" type="email">${intern.email}</a></p>
             <p class="school">School: ${intern.school}</p>
           </div>
         </div>
