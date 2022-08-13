@@ -33,22 +33,21 @@ const managerQ = [
     name: "officeNumber",
     message: "Please enter manager's office number",
   },
-  //   {
-  //     type: "list",
-  //     name: "newMember",
-  //     message: "Is there another team member?",
-  //     choice: ["Yes", " No"],
-  //   },
 ];
 
-//other employee question
-const employeeQ = [
+//manager choice
+const managerC = [
   {
     type: "list",
     name: "role",
     message: "Please choose an employee's role",
-    choices: ["Engineer", "Intern"],
+    choices: ["Engineer", "Intern", "Finish"],
   },
+];
+
+//other employee question
+//engineer question
+const engineerQ = [
   {
     type: "input",
     name: "name",
@@ -68,19 +67,30 @@ const employeeQ = [
     type: "input",
     name: "github",
     message: "Please enter employee's github account name",
-    when: (input) => input.role === "Engineer",
+  },
+];
+
+//intern question
+const internQ = [
+  {
+    type: "input",
+    name: "name",
+    message: "Please enter the name of the employee",
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "Please enter employee's ID",
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "Please enter employee's E-mail",
   },
   {
     type: "input",
     name: "school",
     message: "Please enter employee's school",
-    when: (input) => input.role === "Intern",
-  },
-  {
-    type: "confirm",
-    name: "addAnother",
-    message: "Is there another team member?",
-    default: false,
   },
 ];
 
@@ -93,55 +103,67 @@ const createManager = () => {
     teamArray.push(manager);
     //console.log(teamArray);
 
-    // if (newMember) {
-    //   createEmployee();
-    // } else {
-    //   generateMarkdown(teamArray);
-    // }
+    memberChoice();
   });
 };
 
-const createEmployee = () => {
-  return inquirer.prompt(employeeQ).then((employeeA) => {
-    let { name, id, email, role, github, school, addAnother } = employeeA;
-    let employee;
+//---------------------------------------
+const memberChoice = () => {
+  return inquirer.prompt(managerC).then((managerAforC) => {
+    const member = managerAforC.role;
 
-    if (role === "Engineer") {
-      employee = new Engineer(name, id, email, github);
-      //console.log(teamArray);
-    } else if (role === "Intern") {
-      employee = new Intern(name, id, email, school);
-      //console.log(teamArray);
-    }
+    switch (member) {
+      case "Engineer":
+        createEngineer();
+        break;
 
-    teamArray.push(employee);
-    //console.log(teamArray);
+      case "Intern":
+        createIntern();
+        break;
 
-    if (addAnother) {
-      return createEmployee(teamArray);
-    } else {
-      return teamArray;
+      case "Finish":
+        //return teamArray;
+        //console.log(teamArray);
+        //console.log(generateMarkdown(teamArray));
+        //return generateMarkdown(teamArray);
+        writeToFile(generateMarkdown(teamArray));
     }
   });
 };
 
-const writeFile = (data) => {
-  fs.writeFile("./dist/index.html", data, (err) =>
+//-------------------------------------------
+const createEngineer = () => {
+  return inquirer.prompt(engineerQ).then((engineerA) => {
+    const { name, id, email, github } = engineerA;
+    const engineer = new Engineer(name, id, email, github);
+
+    teamArray.push(engineer);
+
+    memberChoice();
+  });
+};
+
+//-------------------------------------------
+const createIntern = () => {
+  return inquirer.prompt(internQ).then((internA) => {
+    const { name, id, email, school } = internA;
+    const intern = new Intern(name, id, email, school);
+
+    teamArray.push(intern);
+
+    memberChoice();
+  });
+};
+
+function writeToFile(HTMLpage) {
+  fs.writeFile("./dist/index.html", HTMLpage, (err) =>
     err
       ? console.log(err)
       : console.log("team profile created, please check index.html")
   );
-};
+}
 
 //-------------------------------------------
-createManager()
-  .then(createEmployee)
-  .then((teamArray) => {
-    return generateMarkdown(teamArray);
-  })
-  .then((page) => {
-    return writeFile(page);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+createManager().catch((err) => {
+  console.log(err);
+});

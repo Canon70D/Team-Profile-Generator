@@ -7,7 +7,6 @@ const managerCard = function (manager) {
         <h3>${manager.name}</h3>
         <h4>Manager</h4>
       </div>
-
       <div class="card-body">
         <p class="id">ID: ${manager.id}</p>
         <p class="email">Email: ${manager.email}</p>
@@ -55,9 +54,9 @@ const internCard = function (intern) {
       </div>`;
 };
 
-//team array based on users choice
+//put array to html page
 generateMarkdown = (data) => {
-  var teamArray = [];
+  teamArray = [];
 
   for (let i = 0; i < data.length; i++) {
     const employee = data[i];
@@ -97,14 +96,12 @@ const generateTeamHTML = function (employeeArray) {
         <link rel="stylesheet" href="style.css">
         <title>Team Profile</title>
     </head>
-
     <body>
         <header>
             <nav class="navbar">
                 <span class="navbar-brand mb-0 h1 w-100 text-center" id="nav-text">Team Profile</span>
             </nav>
         </header>
-
         <main>
             <div class="container">
                 <div class="row justfy-contect-center">
