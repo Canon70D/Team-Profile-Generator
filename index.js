@@ -2,6 +2,9 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const consoleColor = require("./src/color");
+
+const log = new consoleColor();
 
 const generateMarkdown = require("./src/template");
 
@@ -17,6 +20,14 @@ const managerQ = [
     type: "input",
     name: "name",
     message: "Please enter the manager of the team",
+    validate: (nameCheck) => {
+      if (nameCheck) {
+        return true;
+      } else {
+        log.red("Please enter the manager's name");
+        return false;
+      }
+    },
   },
   {
     type: "input",
@@ -27,6 +38,15 @@ const managerQ = [
     type: "input",
     name: "email",
     message: "Please enter manager's E-mail",
+    validate: (emailCheck) => {
+      valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailCheck);
+      if (valid) {
+        return true;
+      } else {
+        log.red("Please enter a valid email address");
+        return false;
+      }
+    },
   },
   {
     type: "input",
@@ -51,22 +71,39 @@ const engineerQ = [
   {
     type: "input",
     name: "name",
-    message: "Please enter the name of the employee",
+    message: "Please enter the name of the Engineer",
+    validate: (nameCheck) => {
+      if (nameCheck) {
+        return true;
+      } else {
+        consoleColor.red("Please enter the Engineer's name");
+        return false;
+      }
+    },
   },
   {
     type: "input",
     name: "id",
-    message: "Please enter employee's ID",
+    message: "Please enter Engineer's ID",
   },
   {
     type: "input",
     name: "email",
-    message: "Please enter employee's E-mail",
+    message: "Please enter Engineer's E-mail",
+    validate: (emailCheck) => {
+      valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailCheck);
+      if (valid) {
+        return true;
+      } else {
+        log.red("Please enter a valid email address");
+        return false;
+      }
+    },
   },
   {
     type: "input",
     name: "github",
-    message: "Please enter employee's github account name",
+    message: "Please enter Engineer's github account name",
   },
 ];
 
@@ -75,27 +112,50 @@ const internQ = [
   {
     type: "input",
     name: "name",
-    message: "Please enter the name of the employee",
+    message: "Please enter the name of the Intern",
+    validate: (nameCheck) => {
+      if (nameCheck) {
+        return true;
+      } else {
+        log.red("Please enter the Intern's name");
+        return false;
+      }
+    },
   },
   {
     type: "input",
     name: "id",
-    message: "Please enter employee's ID",
+    message: "Please enter Intern's ID",
   },
   {
     type: "input",
     name: "email",
-    message: "Please enter employee's E-mail",
+    message: "Please enter Intern's E-mail",
+    validate: (emailCheck) => {
+      valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailCheck);
+      if (valid) {
+        return true;
+      } else {
+        log.red("Please enter a valid email address");
+        return false;
+      }
+    },
   },
   {
     type: "input",
     name: "school",
-    message: "Please enter employee's school",
+    message: "Please enter Intern's school",
   },
 ];
 
 //-------------------------------------
 const createManager = () => {
+  log.green(`
+  ======================================
+  Creating Team Profile Now
+  ======================================
+  `);
+
   return inquirer.prompt(managerQ).then((managerA) => {
     const { name, id, email, officeNumber } = managerA;
     const manager = new Manager(name, id, email, officeNumber);
@@ -133,6 +193,12 @@ const memberChoice = () => {
 
 //-------------------------------------------
 const createEngineer = () => {
+  log.blue(`
+  ======================================
+  Engineer Information
+  ======================================
+  `);
+
   return inquirer.prompt(engineerQ).then((engineerA) => {
     const { name, id, email, github } = engineerA;
     const engineer = new Engineer(name, id, email, github);
@@ -145,6 +211,12 @@ const createEngineer = () => {
 
 //-------------------------------------------
 const createIntern = () => {
+  log.yellow(`
+  ======================================
+  Intern Information
+  ======================================
+  `);
+
   return inquirer.prompt(internQ).then((internA) => {
     const { name, id, email, school } = internA;
     const intern = new Intern(name, id, email, school);
@@ -159,7 +231,12 @@ function writeToFile(HTMLpage) {
   fs.writeFile("./dist/index.html", HTMLpage, (err) =>
     err
       ? console.log(err)
-      : console.log("team profile created, please check index.html")
+      : log.magenta(`
+        ======================================
+        Team Profile was built successfully
+        Please check index.html for details
+        ====================================== 
+                    `)
   );
 }
 
