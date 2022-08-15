@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: rgba(248, 37, 83, 0.808);
+  --secondary: white;
+  --third: rgb(0, 140, 255);
+  --next: black;
+  --another: rgb(243, 243, 243);
+}
+
+p {
+  background-color: var(--secondary);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--another);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+.navbar {
+  background-color: var(--primary);
+}
+
+.navbar-brand {
+  color: var(--secondary);
+  font-size: 50px;
+}
+
+.card {
+  box-shadow: 10px 10px 5px rgb(154, 156, 156);
+}
+
+.card-header {
+  background-color: var(--third);
+  color: var(--secondary);
+}
+
+.card-body {
+  background-color: var(--another);
+  color: var(--next);
+}

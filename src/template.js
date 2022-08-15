@@ -5,7 +5,9 @@ const managerCard = function (manager) {
     <div class="card h-100">
       <div class="card-header">
         <h3>${manager.name}</h3>
-        <h4>Manager</h4>
+        <h4><span class="material-symbols-outlined">
+        emoji_food_beverage
+        </span>Manager</h4>
       </div>
       <div class="card-body">
         <p class="id">ID: ${manager.id}</p>
@@ -23,7 +25,9 @@ const engineerCard = function (engineer) {
       <div class="card h-100">
         <div class="card-header">
           <h3>${engineer.name}</h3>
-          <h4>Engineer</h4>
+          <h4><span class="material-symbols-outlined">
+          laptop_mac
+          </span>Engineer</h4>
         </div>
   
         <div class="card-body">
@@ -43,7 +47,9 @@ const internCard = function (intern) {
         <div class="card h-100">
           <div class="card-header">
             <h3>${intern.name}</h3>
-            <h4>Intern</h4>
+            <h4><span class="material-symbols-outlined">
+            school
+            </span>Intern</h4>
           </div>
     
           <div class="card-body">
@@ -94,6 +100,7 @@ const generateTeamHTML = function (employeeArray) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <link rel="stylesheet" href="style.css">
         <title>Team Profile</title>
     </head>
@@ -111,6 +118,8 @@ const generateTeamHTML = function (employeeArray) {
             </div>
         </main>
     </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </html>`;
 };
